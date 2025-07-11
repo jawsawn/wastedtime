@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Blurred Radial Time Background</title>
+    <style>
+        /* reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        /* blurred background layer */
+        .bg {
+            position: fixed;
+            top: -10%;
+            left: -10%;
+            width: 120%;
+            height: 120%;
+            filter: blur(20px);
+            transition: background 1s linear;
+            z-index: -1;
+        }
+
+        /* clock on top */
+        .time {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: sans-serif;
+            font-size: 4rem;
+            color: #fff;
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
+            z-index: 1;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="bg"></div>
+    <div class="time">00:00:00</div>
+
+    <script>
+        const bg = document.querySelector('.bg');
+        const timeEl = document.querySelector('.time');
+
+        function update() {
+            const now = new Date();
+            const secondsPast =
+                now.getHours() * 3600 +
+                now.getMinutes() * 60 +
+                now.getSeconds();
+            const fraction = secondsPast / 86400;
+            const angle = fraction * 360;
+
+            // update blurred conic‐gradient
+            bg.style.background = `
+          conic-gradient(
+            red 0deg ${angle}deg,
+            gray ${angle}deg 360deg
+          )
+        `;
+
+            // update digital clock
+            timeEl.textContent = now.toLocaleTimeString('en-GB', {
+                hour12: false
+            });
+        }
+
+        update();
+        setInterval(update, 1000);
+    </script>
+</body>
+
+</html>

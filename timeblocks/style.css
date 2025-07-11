@@ -1,0 +1,180 @@
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+:root {
+    --empty-color: lightgreen;
+    --past-color: hsl(0, 100%, 75%);
+    --selected-color: hsl(189, 100%, 75%);
+
+}
+
+h1 {
+    text-align: center;
+    background: linear-gradient(to right, lightcoral, lightgreen);
+    color: transparent;
+    background-clip: text;
+    font-weight: bolder;
+}
+
+.header {
+    text-align: center;
+    border: 0.3rem solid hsl(0, 0%, 75%);
+    border-radius: 0.5rem;
+    margin-bottom: 0.2rem;
+}
+
+body {
+    height: 100dvh;
+    display: grid;
+    place-items: center;
+}
+
+
+
+#container {
+    padding: 1rem;
+}
+
+@media (max-width: 600px) {
+    body {
+        overflow-y: hidden;
+    }
+
+    .header {
+        display: none;
+    }
+
+    #container {
+        transform: scale(0.85);
+        transform-origin: center;
+        overflow: hidden;
+    }
+}
+
+#planner-container {
+    display: flex;
+}
+
+#planner-labels {
+    background-color: white;
+    display: grid;
+}
+
+.time-label {
+    height: 2rem;
+    width: 4rem;
+    background-color: hsl(0, 0%, 75%);
+    display: grid;
+    place-items: center;
+    margin-bottom: 0.2rem;
+    border-radius: 0.2rem;
+    color: white;
+    font-weight: bold;
+    font-size: 1.4rem;
+
+}
+
+.time-label-right {
+    margin-left: 0.2rem;
+    background: hsl(0, 0%, 75%);
+    display: none;
+
+}
+
+
+#planner-blocks {
+    background-color: white;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}
+
+.time-block {
+    height: 2rem;
+    width: 4rem;
+    background-color: var(--empty-color);
+    margin-left: 0.2rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+        box-shadow: 0 0 0.5rem;
+    }
+
+
+}
+
+.past {
+    background-color: var(--past-color);
+    cursor: default;
+    pointer-events: none;
+}
+
+.now {
+    background-image: linear-gradient(to right, var(--past-color) 0%, transparent 50%);
+
+}
+
+.active {
+    background-color: var(--selected-color) !important;
+}
+
+#settings-toggle {
+    position: fixed;
+    /* Keep the toggle button in a fixed location */
+    top: 20px;
+    right: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1001;
+    /* Ensure it's above the settings panel */
+}
+
+/* Settings panel styles FIX REWRITE */
+#settings-container {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100%;
+    width: 300px;
+    background-color: #f9f9f9;
+    border-left: 1px solid #ccc;
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    box-shadow: -2px 0px 5px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+#settings-container.show {
+    transform: translateX(0);
+    /* Slide in when 'show' class is added */
+}
+
+.settings-content {
+    padding: 20px;
+}
+
+#settings-toggle {
+    position: fixed;
+    /* Keep the toggle button in a fixed location */
+    top: 20px;
+    right: 20px;
+    background-color: #eee;
+    border: 1px solid #ccc;
+    padding: 10px;
+    cursor: pointer;
+    z-index: 1001;
+    /* Ensure it's above the settings panel */
+}
+
+#content {
+    margin-right: 0;
+    /* Adjust margin to prevent overlap */
+    padding: 20px;
+}

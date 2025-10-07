@@ -7,10 +7,14 @@
     <title>wastedtime</title>
 
     <style>
-        body {
-            font-family: sans-serif;
+        * {
+            box-sizing: border-box;
             margin: 0;
             padding: 0;
+        }
+
+        body {
+            font-family: "Segoe UI", sans-serif;
             background: #f9f9f9;
             color: #222;
         }
@@ -18,14 +22,16 @@
         header {
             background: #333;
             color: #fff;
-            padding: 1.5rem 1rem;
+            padding: 2rem 0;
             text-align: center;
             overflow: hidden;
+
+        }
+
+        header h1 {
             margin-left: -100%;
             margin-right: -100%;
         }
-
-        header h1 {}
 
         main {
             max-width: 60rem;
@@ -33,7 +39,12 @@
             padding: 1rem;
         }
 
-        .plog {
+        h2 {
+            margin-bottom: 1rem;
+            color: #014979;
+        }
+
+        .info {
             margin-bottom: 2rem;
             padding: 1rem;
             background: #fff;
@@ -78,7 +89,7 @@
         <h1 id="ticking-title">_wasted_time_</h1>
     </header>
     <main>
-        <section class="plog">
+        <section class="info">
             <h2>Info</h2>
             <p>Wasted Time is a design language for people with time blindness and ADHD. Do you ever wake up go on your
                 day and realize, "why is it suddenly 6 pm now?". Or get nothing done until it's 2 am? Do you know how
@@ -107,7 +118,7 @@
     const title = document.getElementById('ticking-title');
     //refresh when screen size changes
     let screenWidth = setScreenWidth();
-    function setScreenWidth() { return (window.innerWidth / 16) - 17; }
+    function setScreenWidth() { return (window.innerWidth / 16) - 16; }
     let dotCount = 0;
 
     window.addEventListener('resize', () => {

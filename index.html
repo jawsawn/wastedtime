@@ -11,12 +11,14 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            text-decoration: none;
         }
 
         body {
             font-family: "Segoe UI", sans-serif;
             background: #f9f9f9;
             color: #222;
+            overflow-x: hidden;
         }
 
         header {
@@ -31,6 +33,7 @@
         header h1 {
             margin-left: -100%;
             margin-right: -100%;
+            font-family: sans-serif;
         }
 
         main {
@@ -42,6 +45,7 @@
         h2 {
             margin-bottom: 1rem;
             color: #014979;
+            font-family: sans-serif;
         }
 
         .info {
@@ -62,7 +66,7 @@
             padding: 1rem;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
             text-align: center;
-            transition: background-color 0.5s;
+            transition: background-color ease 0.2s;
             text-decoration: none;
             color: inherit;
         }
@@ -90,32 +94,41 @@
     </header>
     <main>
         <section class="info">
-            <h2>Info</h2>
-            <p>Wasted Time is a design language for people with time blindness and ADHD. Do you ever wake up go on your
-                day and realize, "why is it suddenly 6 pm now?". Or get nothing done until it's 2 am? Do you know how
-                much time you actually have in a day? </p>
+            <h2 id="ticking-h2-info">Info_</h2>
+            <p>Wasted Time is a design language created for people with time blindness or ADHD.</p>
+            <p>Do you ever wake up,go about your day, and suddenly realize, “Why is it 6 p.m. already?” </p>
+            <p>Or find yourself getting nothing done until it’s 2 a.m.? Do you really know how much time you actually
+                have in a day?</p>
         </section>
         <section>
-            <h2>Current Projects</h2>
+            <h2 id="ticking-h2-projects">Current_Projects_</h2>
             <div class="projects-grid">
                 <a href="radial/" class="project-card">
                     <h3>Radial</h3>
-                    <p>This clock hits midnight... only once</p>
+                    <p>This clock hits 12... only once</p>
                 </a>
+
                 <a href="timeblocks/" class="project-card">
                     <h3>Time Blocks</h3>
-                    <p>Compartmentalize your life... with 15 minute blocks</p>
+                    <p>Compartmentalize your life... into 15 minute blocks</p>
+                </a>
+
+                <a href="drip/" class="project-card">
+                    <h3>Drip</h3>
+                    <p>Watch your seconds go down the drain</p>
                 </a>
             </div>
         </section>
     </main>
     <footer>
-        <p>&copy; 2025 jawsawn</p>
+        <p>&copy; 2025 jawsawn <a href="https://x.com/Jawsawn">🐦</a></p>
     </footer>
 </body>
 <script>
     //add dots to the end and start of the title every second
     const title = document.getElementById('ticking-title');
+    const h2info = document.getElementById('ticking-h2-info');
+    const h2projects = document.getElementById('ticking-h2-projects');
     //refresh when screen size changes
     let screenWidth = setScreenWidth();
     function setScreenWidth() { return (window.innerWidth / 16) - 16; }
@@ -126,11 +139,15 @@
         //dotCount = 0;
     });
 
+
     setInterval(() => {
         if (dotCount < screenWidth) {
             dotCount++;
             title.textContent = `${'.'.repeat(dotCount)}_wasted_time_${'.'.repeat(dotCount)}`;
         }
+        h2info.textContent = `Info_${'.'.repeat(dotCount)}`;
+        h2projects.textContent = `Current_Projects_${'.'.repeat(dotCount)}`;
+
     }, 1000);
 
 </script>

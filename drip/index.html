@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Drip Time</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --diff: 0vh;
+        }
+
+
+        body {
+            height: 100dvh;
+            overflow: hidden;
+            background: gray;
+        }
+
+        .drip-clock {
+            height: 100dvh;
+            display: grid;
+            place-items: center;
+        }
+
+        @keyframes fall {
+            0% {
+                opacity: 0;
+            }
+
+            100% {
+                margin-bottom: calc(-100vh + var(--diff)/2);
+                opacity: 1;
+                color: red;
+            }
+        }
+
+        .time-label {
+            font-family: "Segoe UI", sans-serif;
+            font-size: 4rem;
+            color: #fff;
+            margin-bottom: var(--diff);
+
+
+        }
+
+        .time-label-falling {
+            margin-bottom: var(--diff);
+            position: absolute;
+            font-family: "Segoe UI", sans-serif;
+            font-size: 4rem;
+            color: #fff;
+            animation: fall ease-in 1s infinite;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="drip-clock">
+        <div class="time-label">00:00:00</div>
+        <div class="time-label-falling">00:00:00</div>
+    </div>
+
+
+    <script>
+        const drip_clock = document.querySelector('.drip-clock');
+        const time_label = document.querySelector('.time-label');
+        const time_label_falling = document.querySelector('.time-label-falling');
+
+        function update() {
+            const now = new Date();
+            const secondsPast =
+                now.getHours() * 3600 +
+                now.getMinutes() * 60 +
+                now.getSeconds();
+            const fraction = secondsPast / 86400;
+            const percentage = fraction * 100;
+
+            // update blurred linear-gradient
+            drip_clock.style.background = `
+                linear-gradient(
+                    to top,
+                    red ${percentage}%,
+                    gray ${percentage}%
+            )`;
+
+
+
+            // update digital clock
+            time_label.textContent = now.toLocaleTimeString('en-GB', {
+                hour12: false
+            });
+            time_label_falling.textContent = now.toLocaleTimeString('en-GB', {
+                hour12: false
+            });
+            if (percentage > 45) {
+                document.documentElement.style.setProperty('--diff', "100vh");
+            } else {
+                document.documentElement.style.setProperty('--diff', "0vh");
+            }
+        }
+
+        update();
+        setInterval(update, 1000);
+    </script>
+</body>
+
+</html>

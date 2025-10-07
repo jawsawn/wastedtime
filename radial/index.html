@@ -15,9 +15,7 @@
 
         html,
         body {
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
+            height: 100dvh;
         }
 
         /* blurred background layer */
@@ -27,8 +25,7 @@
             left: -10%;
             width: 120%;
             height: 120%;
-            filter: blur(20px);
-            transition: background 1s linear;
+            filter: blur(5px);
             z-index: -1;
         }
 
@@ -40,7 +37,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            font-family: sans-serif;
+            font-family: "Segoe UI", sans-serif;
             font-size: 4rem;
             color: #fff;
             text-shadow: 0 0 10px rgba(0, 0, 0, 0.7);
@@ -68,11 +65,10 @@
 
             // update blurred conic‐gradient
             bg.style.background = `
-          conic-gradient(
-            red 0deg ${angle}deg,
-            gray ${angle}deg 360deg
-          )
-        `;
+                conic-gradient(
+                    red 0deg ${angle}deg,
+                    gray ${angle}deg 360deg
+                )`;
 
             // update digital clock
             timeEl.textContent = now.toLocaleTimeString('en-GB', {
